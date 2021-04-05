@@ -107,10 +107,10 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "add_two_ints_server");
   ros::NodeHandle n;
 
-  ros::ServiceServer service = n.advertiseService("add_two_ints", Add);
+  ros::ServiceServer service = n.advertiseService("AddTwoInts", Add);
   ROS_INFO("Ready to add two ints.");
 
-  FibonacciServer fibonacci("fibonacci");
+  FibonacciServer fibonacci("Fibonacci");
   ros::spin();
 
   return 0;

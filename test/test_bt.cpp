@@ -4,6 +4,10 @@
 #include <behaviortree_ros/AddTwoInts.h>
 #include <behaviortree_ros/FibonacciAction.h>
 
+#include <fstream>
+#include <streambuf>
+#include <ros/package.h>
+
 using namespace BT;
 
 //-------------------------------------------------------------
@@ -154,29 +158,10 @@ private:
   int expected_result_;
 };
 
-//-----------------------------------------------------
-
-  // Simple tree, used to execute once each action.
-  static const char* xml_text = R"(
- <root >
-     <BehaviorTree>
-        <Sequence>
-            <AddTwoInts service_name = "add_two_ints"
-                        first_int = "3" second_int = "4"
-                        sum = "{add_two_result}" />
-            <PrintValue message="{add_two_result}"/>
-
-            <RetryUntilSuccesful num_attempts="4">
-                <Timeout msec="300">
-                    <Fibonacci server_name="fibonacci" order="5"
-                               result="{fibonacci_result}" />
-                </Timeout>
-            </RetryUntilSuccesful>
-            <PrintValue message="{fibonacci_result}"/>
-        </Sequence>
-     </BehaviorTree>
- </root>
- )";
+// Retrieve the xml file from tree_filename inside the trees/ directory 
+std::string tree_filename = "fibonacci_tree.xml";
+std::ifstream treefile(ros::package::getPath("behaviortree_ros") + "/trees/" + tree_filename);
+std::string xml_text((std::istreambuf_iterator<char>(treefile)), std::istreambuf_iterator<char>());
 
 int main(int argc, char **argv)
 {
@@ -188,6 +173,12 @@ int main(int argc, char **argv)
   factory.registerNodeType<PrintValue>("PrintValue");
   RegisterRosService<AddTwoIntsAction>(factory, "AddTwoInts", nh);
   RegisterRosAction<FibonacciServer>(factory, "Fibonacci", nh);
+
+  if(treefile.fail())
+  {
+    ROS_ERROR("File \"%s\" does not exist at %s", tree_filename.c_str(), 
+      (ros::package::getPath("behaviortree_ros")+ "/trees/").c_str());
+  }
 
   auto tree = factory.createTreeFromText(xml_text);
 
