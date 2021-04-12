@@ -1,4 +1,3 @@
-
 # BehaviorTree.ROS
 
 [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP) is a __middleware independent__ framework 
@@ -21,7 +20,11 @@ Currently, two wrappers are provided:
 ## Adding Actions to the GUI
 As of the time of this writing, the [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP)'s GUI tool, [Groot](https://github.com/BehaviorTree/Groot), is not explicitly compatible with the ROS library. What this means is that a small number of modifications may need to be made in order for the xml from Groot to be compatible with the ROS tool. 
 
-Once Groot is installed, you can create a new Action node in the GUI or directly in the xml:
+Once Groot is installed, you can create a new Action node in the GUI,
+
+![Screenshot from 2021-04-12 16-46-59](https://user-images.githubusercontent.com/7253338/114463049-eb0dd100-9bb1-11eb-90e9-96f417f6510c.png)
+
+or directly in the xml:
 
         <Action ID="moveTwist">
             <input_port default="0" name="angular_x"/>
@@ -32,7 +35,7 @@ Once Groot is installed, you can create a new Action node in the GUI or directly
             <input_port default="0" name="linear_z"/>
         </Action>
 
-These ports will need to be defined in the C++ class as well (below as in test_bt.cpp)
+In either case, these ports will need to be defined in the C++ class as well (below as in `test_bt.cpp`)
 
       static BT::PortsList providedPorts() {
         return  {
