@@ -18,7 +18,7 @@ Currently, two wrappers are provided:
 - [RosActionNode](include/behaviortree_ros/bt_action_node.h) that, similarly, is a wrapper around
   [actionlib::SimpleActionClient](http://wiki.ros.org/actionlib).
 
-## GUI
+## Adding Actions to the GUI
 As of the time of this writing, the [BehaviorTree.CPP](https://github.com/BehaviorTree/BehaviorTree.CPP)'s GUI tool, [Groot](https://github.com/BehaviorTree/Groot), is not explicitly compatible with the ROS library. What this means is that a small number of modifications may need to be made in order for the xml from Groot to be compatible with the ROS tool. 
 
 Once Groot is installed, you can create a new Action node in the GUI or directly in the xml:
@@ -32,5 +32,15 @@ Once Groot is installed, you can create a new Action node in the GUI or directly
             <input_port default="0" name="linear_z"/>
         </Action>
 
-![Screenshot from 2021-04-12 16-46-59](https://user-images.githubusercontent.com/7253338/114459728-e5fb5280-9bae-11eb-8755-e7547f01d708.png)
+These ports will need to be defined in the C++ class as well (below as in test_bt.cpp)
+
+      static BT::PortsList providedPorts() {
+        return  {
+          InputPort<double>("linear_x"),
+          InputPort<double>("linear_y"),
+          InputPort<double>("linear_z"),
+          InputPort<double>("angular_x"),
+          InputPort<double>("angular_y"),
+          InputPort<double>("angular_z")};
+      }
 

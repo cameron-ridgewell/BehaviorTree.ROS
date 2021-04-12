@@ -28,22 +28,6 @@ add_message_files(
   TreeNode.msg
 )
 
-add_service_files(
-   FILES
-   AddTwoInts.srv
- )
-
-add_action_files(
-   DIRECTORY action
-   FILES     Fibonacci.action
-)
-
-generate_messages(
-  DEPENDENCIES
-  std_msgs
-  actionlib_msgs
-)
-
 catkin_package(
     INCLUDE_DIRS include
     LIBRARIES
@@ -66,10 +50,6 @@ include_directories( include ${catkin_INCLUDE_DIRS})
 add_executable(test_bt test/test_bt.cpp)
 add_dependencies(test_bt ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 target_link_libraries(test_bt ${catkin_LIBRARIES} )
-
-add_executable(test_server test/test_server.cpp)
-add_dependencies(test_server ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
-target_link_libraries(test_server ${catkin_LIBRARIES} )
 
 ######################################################
 # INSTALL

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<root main_tree_to_execute="BehaviorTree">
+    <!-- ////////// -->
+    <BehaviorTree ID="BehaviorTree">
+        <Sequence>
+            <Action ID="moveTwist" angular_x="0" angular_y="0" angular_z="0" linear_x="0.3" linear_y="0" linear_z="0"/>
+            <Action ID="moveTwist" angular_x="0" angular_y="0" angular_z="0" linear_x="0" linear_y="-0.3" linear_z="0"/>
+            <Action ID="moveTwist" angular_x="0" angular_y="0" angular_z="0" linear_x="-0.3" linear_y="0" linear_z="0"/>
+            <Action ID="moveTwist" angular_x="0" angular_y="0" angular_z="0" linear_x="0" linear_y="0.3" linear_z="0"/>
+        </Sequence>
+    </BehaviorTree>
+    <!-- ////////// -->
+    <TreeNodesModel>
+        <Action ID="moveTwist">
+            <input_port default="0" name="angular_x"/>
+            <input_port default="0" name="angular_y"/>
+            <input_port default="0" name="angular_z"/>
+            <input_port default="0" name="linear_x"/>
+            <input_port default="0" name="linear_y"/>
+            <input_port default="0" name="linear_z"/>
+        </Action>
+    </TreeNodesModel>
+    <!-- ////////// -->
+</root>
+
