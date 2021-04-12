@@ -8,6 +8,7 @@ set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 ######################################################
 
 set(ROS_DEPENDENCIES
+    roslib
     roscpp std_msgs
     behaviortree_cpp_v3
     actionlib_msgs
